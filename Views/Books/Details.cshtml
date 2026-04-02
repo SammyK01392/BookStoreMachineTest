@@ -1,0 +1,49 @@
+@model BookStoreMachineTest.Models.Book
+@{
+    ViewData["Title"] = "Book Details";
+}
+
+<div class="detail-page">
+    <div class="detail-card">
+        <h2>📖 @Model.Title</h2>
+
+        <dl>
+            <div class="detail-row">
+                <dt>Title</dt>
+                <dd>@Model.Title</dd>
+            </div>
+            <div class="detail-row">
+                <dt>Author</dt>
+                <dd>@Model.Author</dd>
+            </div>
+            <div class="detail-row">
+                <dt>Category</dt>
+                <dd><span class="book-category">@Model.Category</span></dd>
+            </div>
+            <div class="detail-row">
+                <dt>Price</dt>
+                <dd><strong class="book-price">$@Model.Price.ToString("F2")</strong></dd>
+            </div>
+            <div class="detail-row">
+                <dt>Description</dt>
+                <dd>@Model.Description</dd>
+            </div>
+            @if (!string.IsNullOrEmpty(Model.CoverImageUrl))
+            {
+                <div class="detail-row">
+                    <dt>Cover Image</dt>
+                    <dd><a href="@Model.CoverImageUrl" target="_blank" style="color:var(--primary);">View Image</a></dd>
+                </div>
+            }
+            <div class="detail-row">
+                <dt>Added On</dt>
+                <dd>@Model.CreatedAt.ToString("MMM dd, yyyy")</dd>
+            </div>
+        </dl>
+
+        <div class="form-actions" style="margin-top:1.5rem;">
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn-primary">Edit</a>
+            <a asp-action="Index" class="btn-secondary">Back to Books</a>
+        </div>
+    </div>
+</div>

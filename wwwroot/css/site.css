@@ -1,0 +1,611 @@
+/* ── Variables ── */
+:root {
+    --primary: #1E5CA5;
+    --primary-dark: #164480;
+    --primary-light: #2E72C2;
+    --primary-xlight: #EBF2FC;
+    --accent: #F0A500;
+    --bg: #F4F8FE;
+    --surface: #ffffff;
+    --border: #C8DDEF;
+    --text: #1a2b42;
+    --text-muted: #5a7a9a;
+    --shadow: 0 4px 24px rgba(30,92,165,0.10);
+    --radius: 12px;
+    --transition: 0.2s ease;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg);
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+}
+
+/* content area should expand to push footer to the bottom */
+.content-wrap {
+    flex: 1 0 auto;
+}
+
+/* ── Navbar ── */
+.navbar {
+    background: var(--primary) !important;
+    box-shadow: 0 2px 20px rgba(30,92,165,0.25);
+}
+
+.navbar-brand {
+    font-weight: 800;
+    font-size: 1.3rem;
+    color: #fff !important;
+    letter-spacing: -0.3px;
+}
+
+.nav-link {
+    color: rgba(255,255,255,0.85) !important;
+    transition: color var(--transition);
+    font-weight: 500;
+}
+
+    .nav-link:hover {
+        color: #fff !important;
+    }
+
+/* ── Login Page ── */
+.login-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(145deg, #1E5CA5 0%, #2E72C2 50%, #EBF2FC 100%);
+    padding: 2rem;
+}
+
+.login-card {
+    background: var(--surface);
+    border-radius: 20px;
+    padding: 3rem 2.5rem;
+    width: 100%;
+    max-width: 420px;
+    box-shadow: 0 20px 60px rgba(30,92,165,0.25);
+}
+
+.login-logo {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+    .login-logo .logo-icon {
+        width: 64px;
+        height: 64px;
+        background: var(--primary);
+        border-radius: 16px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+        margin-bottom: 1rem;
+    }
+
+    .login-logo h1 {
+        font-size: 1.6rem;
+        font-weight: 800;
+        color: var(--primary);
+        margin-bottom: 4px;
+    }
+
+    .login-logo p {
+        color: var(--text-muted);
+        font-size: 0.9rem;
+    }
+
+.login-card .form-group {
+    margin-bottom: 1.2rem;
+}
+
+    .login-card .form-group label {
+        display: block;
+        font-size: 0.82rem;
+        font-weight: 700;
+        color: var(--text);
+        margin-bottom: 6px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+.login-card .form-control {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color var(--transition), box-shadow var(--transition);
+    background: var(--bg);
+    color: var(--text);
+}
+
+    .login-card .form-control:focus {
+        border-color: var(--primary);
+        background: var(--surface);
+        box-shadow: 0 0 0 4px rgba(30,92,165,0.12);
+    }
+
+.btn-login {
+    width: 100%;
+    padding: 13px;
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background var(--transition), transform var(--transition);
+    margin-top: 0.5rem;
+    letter-spacing: 0.3px;
+}
+
+    .btn-login:hover {
+        background: var(--primary-dark);
+        transform: translateY(-1px);
+    }
+
+    .btn-login:active {
+        transform: translateY(0);
+    }
+
+.login-error {
+    background: #fef2f2;
+    border: 1px solid #fca5a5;
+    color: #dc2626;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    margin-bottom: 1.2rem;
+    text-align: center;
+}
+
+/* ── Page Header ── */
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2.5rem 0 1.5rem;
+}
+
+.header-content h1 {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--primary);
+}
+
+.header-content p {
+    color: var(--text-muted);
+    margin-top: 4px;
+}
+
+/* ── Search ── */
+.search-container {
+    margin-bottom: 2rem;
+}
+
+.search-wrapper {
+    position: relative;
+    max-width: 560px;
+}
+
+.search-input {
+    width: 100%;
+    padding: 14px 48px 14px 20px;
+    border: 2px solid var(--border);
+    border-radius: 50px;
+    font-size: 1rem;
+    background: var(--surface);
+    transition: border-color var(--transition), box-shadow var(--transition);
+    outline: none;
+    color: var(--text);
+}
+
+    .search-input:focus {
+        border-color: var(--primary);
+        box-shadow: 0 0 0 4px rgba(30,92,165,0.1);
+    }
+
+.search-icon {
+    position: absolute;
+    right: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.1rem;
+}
+
+.search-spinner {
+    position: absolute;
+    right: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* ── Book Grid ── */
+.book-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.book-card {
+    background: var(--surface);
+    border-radius: var(--radius);
+    border: 1.5px solid var(--border);
+    overflow: hidden;
+    transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+    display: flex;
+}
+
+    .book-card:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow);
+        border-color: var(--primary-light);
+    }
+
+.book-cover {
+    width: 90px;
+    flex-shrink: 0;
+}
+
+    .book-cover img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+.cover-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--primary), var(--primary-light));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    font-weight: 800;
+    color: white;
+}
+
+.book-info {
+    padding: 1rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.book-category {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--primary);
+    background: var(--primary-xlight);
+    padding: 2px 8px;
+    border-radius: 20px;
+    width: fit-content;
+}
+
+.book-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--primary-dark);
+    margin-top: 2px;
+}
+
+.book-author {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.book-description {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    flex: 1;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.book-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 8px;
+}
+
+.book-price {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--primary);
+}
+
+.book-actions {
+    display: flex;
+    gap: 6px;
+}
+
+/* ── Buttons ── */
+.btn-primary {
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    padding: 10px 22px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background var(--transition);
+    display: inline-block;
+}
+
+    .btn-primary:hover {
+        background: var(--primary-dark);
+        color: #fff;
+    }
+
+.btn-secondary {
+    background: transparent;
+    color: var(--text-muted);
+    border: 1.5px solid var(--border);
+    padding: 10px 22px;
+    border-radius: 8px;
+    text-decoration: none;
+    display: inline-block;
+    transition: border-color var(--transition);
+}
+
+    .btn-secondary:hover {
+        border-color: var(--primary);
+        color: var(--primary);
+    }
+
+.btn-details {
+    font-size: 0.75rem;
+    padding: 4px 10px;
+    background: var(--primary);
+    color: #fff;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: background var(--transition);
+}
+
+    .btn-details:hover {
+        background: var(--primary-dark);
+        color: #fff;
+    }
+
+.btn-edit {
+    font-size: 0.75rem;
+    padding: 4px 10px;
+    background: #0ea5e9;
+    color: #fff;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: background var(--transition);
+}
+
+    .btn-edit:hover {
+        background: #0284c7;
+        color: #fff;
+    }
+
+.btn-delete {
+    font-size: 0.75rem;
+    padding: 4px 10px;
+    background: #ef4444;
+    color: #fff;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: background var(--transition);
+}
+
+    .btn-delete:hover {
+        background: #dc2626;
+        color: #fff;
+    }
+
+/* ── Forms ── */
+.form-page {
+    display: flex;
+    justify-content: center;
+    padding: 2rem 0;
+}
+
+.form-card {
+    background: var(--surface);
+    border-radius: var(--radius);
+    border: 1.5px solid var(--border);
+    padding: 2.5rem;
+    width: 100%;
+    max-width: 640px;
+    box-shadow: var(--shadow);
+}
+
+    .form-card h2 {
+        font-size: 1.5rem;
+        font-weight: 800;
+        color: var(--primary);
+        margin-bottom: 1.5rem;
+    }
+
+.form-group {
+    margin-bottom: 1.2rem;
+}
+
+    .form-group label {
+        display: block;
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: var(--text);
+        margin-bottom: 6px;
+    }
+
+.form-control {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color var(--transition), box-shadow var(--transition);
+    background: var(--bg);
+    color: var(--text);
+}
+
+    .form-control:focus {
+        border-color: var(--primary);
+        background: var(--surface);
+        box-shadow: 0 0 0 3px rgba(30,92,165,0.1);
+    }
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.form-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.field-error {
+    font-size: 0.78rem;
+    color: #ef4444;
+}
+
+/* ── Alert ── */
+.alert {
+    padding: 12px 18px;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+}
+
+.alert-success {
+    background: #eff6ff;
+    border: 1px solid #93c5fd;
+    color: #1d4ed8;
+}
+
+/* ── Empty State ── */
+.empty-state {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: var(--text-muted);
+}
+
+/* ── Details / Delete page ── */
+.detail-page {
+    display: flex;
+    justify-content: center;
+    padding: 2rem 0;
+}
+
+.detail-card {
+    background: var(--surface);
+    border-radius: var(--radius);
+    border: 1.5px solid var(--border);
+    padding: 2.5rem;
+    width: 100%;
+    max-width: 640px;
+    box-shadow: var(--shadow);
+}
+
+    .detail-card h2 {
+        font-size: 1.4rem;
+        font-weight: 800;
+        color: var(--primary);
+        margin-bottom: 1.5rem;
+        padding-bottom: 1rem;
+        border-bottom: 2px solid var(--border);
+    }
+
+.detail-row {
+    display: flex;
+    padding: 0.7rem 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.9rem;
+}
+
+    .detail-row:last-child {
+        border-bottom: none;
+    }
+
+    .detail-row dt {
+        width: 160px;
+        flex-shrink: 0;
+        font-weight: 700;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        font-size: 0.75rem;
+        letter-spacing: 0.4px;
+        padding-top: 2px;
+    }
+
+    .detail-row dd {
+        flex: 1;
+        color: var(--text);
+        margin: 0;
+    }
+
+.delete-warning {
+    background: #fef2f2;
+    border: 1.5px solid #fca5a5;
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 1.5rem;
+    color: #dc2626;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+/* ── Container ── */
+.container {
+    max-width: 1200px;
+}
+nav-signout-btn {
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #fff;
+    padding: 5px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    transition: background var(--transition), border-color var(--transition);
+    white-space: nowrap;
+}
+
+.nav-signout-btn:hover {
+    background: rgba(255, 255, 255, 0.22);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+/* ── Layout Helpers ── */
+.navbar.sticky-top {
+    z-index: 1030;
+}

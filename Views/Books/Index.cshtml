@@ -1,0 +1,62 @@
+﻿@model IEnumerable<BookStoreMachineTest.Models.Book>
+@{
+    ViewData["Title"] = "Book Store";
+}
+
+<div class="page-header">
+    <div class="header-content">
+        <h1>📚 Book Store</h1>
+        <p>Discover your next great read</p>
+    </div>
+ 
+        <a asp-action="Create" class="btn-primary">+ Add Book</a>
+    
+</div>
+
+<!-- AJAX Search Bar -->
+<div class="search-container">
+    <div class="search-wrapper">
+        <input type="text" id="searchInput" class="search-input"
+               placeholder="Search by title, author, or category..."
+               value="@ViewBag.SearchTerm" autocomplete="off" />
+        <div class="search-icon">🔍</div>
+        <div id="searchSpinner" class="search-spinner" style="display:none;">⏳</div>
+    </div>
+</div>
+
+<!-- Alert messages -->
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">@TempData["Success"]</div>
+}
+
+<!-- Book list (target for AJAX updates) -->
+<div id="bookListContainer">
+    <partial name="_BookList" model="Model" />
+</div>
+
+@section Scripts {
+    <script>
+        const searchInput = document.getElementById('searchInput');
+        const spinner = document.getElementById('searchSpinner');
+        let debounceTimer;
+
+        searchInput.addEventListener('input', function () {
+            clearTimeout(debounceTimer);
+            spinner.style.display = 'block';
+
+            debounceTimer = setTimeout(async () => {
+                const term = this.value.trim();
+                try {
+                    const res = await fetch(`/Books/Search?term=${encodeURIComponent(term)}`);
+                    const html = await res.text();
+                    document.getElementById('bookListContainer').innerHTML = html;
+                } catch (err) {
+                    console.error('Search failed:', err);
+                } finally {
+                    spinner.style.display = 'none';
+                }
+            }, 350); // 350ms debounce
+        });
+    </script>
+}

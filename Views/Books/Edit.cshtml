@@ -1,0 +1,55 @@
+@model BookStoreMachineTest.Models.Book
+@{
+    ViewData["Title"] = "Edit Book";
+}
+
+<div class="form-page">
+    <div class="form-card">
+        <h2>Edit Book</h2>
+
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="field-error" style="margin-bottom:1rem;"></div>
+            <input type="hidden" asp-for="Id" />
+
+            <div class="form-group">
+                <label asp-for="Title">Title</label>
+                <input asp-for="Title" class="form-control" placeholder="Book title" />
+                <span asp-validation-for="Title" class="field-error"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Author">Author</label>
+                <input asp-for="Author" class="form-control" placeholder="Author name" />
+                <span asp-validation-for="Author" class="field-error"></span>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label asp-for="Category">Category</label>
+                    <input asp-for="Category" class="form-control" placeholder="e.g. Programming" />
+                    <span asp-validation-for="Category" class="field-error"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Price">Price ($)</label>
+                    <input asp-for="Price" class="form-control" type="number" step="0.01" placeholder="0.00" />
+                    <span asp-validation-for="Price" class="field-error"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description">Description</label>
+                <textarea asp-for="Description" class="form-control" rows="3" placeholder="Brief description..."></textarea>
+            </div>
+            <div class="form-group">
+                <label asp-for="CoverImageUrl">Cover Image URL</label>
+                <input asp-for="CoverImageUrl" class="form-control" placeholder="https://..." />
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn-primary">Save Changes</button>
+                <a asp-action="Index" class="btn-secondary">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}
