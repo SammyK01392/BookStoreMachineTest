@@ -1,0 +1,128 @@
+﻿@model BookStoreMachineTest.ViewModels.DashboardViewModel
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="dash-wrap">
+
+    <!-- ── Header ── -->
+    <div class="dash-header">
+        <div>
+            <h1 class="dash-title">Dashboard</h1>
+            <p class="dash-sub">Welcome back, @User.Identity?.Name</p>
+        </div>
+        <a asp-controller="Books" asp-action="Create" class="dash-add-btn">
+            <span>＋</span> Add Book
+        </a>
+    </div>
+
+    <!-- ── Stat Cards ── -->
+    <div class="stat-grid">
+        <div class="stat-card stat-blue">
+            <div class="stat-icon">📚</div>
+            <div class="stat-body">
+                <span class="stat-value">@Model.TotalBooks</span>
+                <span class="stat-label">Total Books</span>
+            </div>
+        </div>
+        <div class="stat-card stat-teal">
+            <div class="stat-icon">🏷️</div>
+            <div class="stat-body">
+                <span class="stat-value">@Model.TotalCategories</span>
+                <span class="stat-label">Categories</span>
+            </div>
+        </div>
+        <div class="stat-card stat-gold">
+            <div class="stat-icon">💰</div>
+            <div class="stat-body">
+                <span class="stat-value">$@Model.TotalInventoryValue.ToString("F2")</span>
+                <span class="stat-label">Inventory Value</span>
+            </div>
+        </div>
+        <div class="stat-card stat-indigo">
+            <div class="stat-icon">📊</div>
+            <div class="stat-body">
+                <span class="stat-value">$@Model.AveragePrice.ToString("F2")</span>
+                <span class="stat-label">Avg. Price</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── Info Row ── -->
+    <div class="info-row">
+        <div class="info-chip">
+            <span class="info-chip-label">Top Category</span>
+            <span class="info-chip-value">@Model.MostPopularCategory</span>
+        </div>
+        @if (Model.MostExpensiveBook != null)
+        {
+            <div class="info-chip">
+                <span class="info-chip-label">Highest Price</span>
+                <span class="info-chip-value">@Model.MostExpensiveBook.Title — $@Model.MostExpensiveBook.Price.ToString("F2")</span>
+            </div>
+        }
+    </div>
+
+    <!-- ── Alert ── -->
+    @if (TempData["Success"] != null)
+    {
+        <div class="dash-alert">✔ @TempData["Success"]</div>
+    }
+
+    <!-- ── Table Panel ── -->
+    <div class="table-panel">
+        <div class="table-panel-header">
+            <h2 class="table-panel-title">All Books</h2>
+            <!-- Search -->
+            <div class="dash-search-wrap">
+                <input type="text" id="dashSearch" class="dash-search"
+                       placeholder="Search title, author, category…"
+                       value="@Model.SearchTerm" autocomplete="off" />
+                <span class="dash-search-ico">🔍</span>
+            </div>
+        </div>
+
+        <div id="tableContainer">
+            @await Html.PartialAsync("_DashBookTable", Model.Books)
+        </div>
+    </div>
+
+</div>
+
+@section Scripts {
+<script>
+    const input = document.getElementById('dashSearch');
+    let timer;
+    input.addEventListener('input', function () {
+        clearTimeout(timer);
+        timer = setTimeout(async () => {
+            const term = encodeURIComponent(this.value.trim());
+            const res  = await fetch(`/Books/Search?term=${term}`);
+            // reuse existing Search endpoint but render our table partial
+            // We'll do a client-side filter instead for the dashboard
+            const rows = document.querySelectorAll('#tableContainer tbody tr[data-row]');
+            const q    = this.value.toLowerCase();
+            rows.forEach(r => {
+                r.style.display = r.dataset.search.includes(q) ? '' : 'none';
+            });
+            updateEmpty();
+        }, 250);
+    });
+
+    function updateEmpty() {
+        const tbody   = document.querySelector('#tableContainer tbody');
+        const visible = [...tbody.querySelectorAll('tr[data-row]')].filter(r => r.style.display !== 'none');
+        let empty     = tbody.querySelector('.dash-empty-row');
+        if (visible.length === 0) {
+            if (!empty) {
+                empty = document.createElement('tr');
+                empty.className = 'dash-empty-row';
+                empty.innerHTML = '<td colspan="6" class="dash-empty-cell">No books match your search.</td>';
+                tbody.appendChild(empty);
+            }
+        } else {
+            empty?.remove();
+        }
+    }
+</script>
+}

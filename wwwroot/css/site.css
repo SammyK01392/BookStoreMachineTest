@@ -609,3 +609,470 @@ nav-signout-btn {
 .navbar.sticky-top {
     z-index: 1030;
 }
+
+/* ════════════════════════════════════════════
+   DASHBOARD  —  append to site.css
+   ════════════════════════════════════════════ */
+
+/* ── Layout ── */
+.dash-wrap {
+    padding: 2rem 0 3rem;
+    animation: dashFadeIn 0.4s ease both;
+}
+
+@keyframes dashFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ── Header ── */
+.dash-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.dash-title {
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--primary);
+    letter-spacing: -0.5px;
+}
+
+.dash-sub {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-top: 3px;
+}
+
+.dash-add-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 22px;
+    background: var(--primary);
+    color: #fff;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 0.92rem;
+    text-decoration: none;
+    transition: background var(--transition), transform var(--transition);
+    white-space: nowrap;
+}
+
+    .dash-add-btn:hover {
+        background: var(--primary-dark);
+        color: #fff;
+        transform: translateY(-2px);
+    }
+
+/* ── Stat Cards ── */
+.stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.25rem;
+    margin-bottom: 1.5rem;
+}
+
+.stat-card {
+    border-radius: 14px;
+    padding: 1.4rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border: 1.5px solid transparent;
+    animation: dashFadeIn 0.5s ease both;
+}
+
+    .stat-card:nth-child(1) {
+        animation-delay: 0.05s;
+    }
+
+    .stat-card:nth-child(2) {
+        animation-delay: 0.10s;
+    }
+
+    .stat-card:nth-child(3) {
+        animation-delay: 0.15s;
+    }
+
+    .stat-card:nth-child(4) {
+        animation-delay: 0.20s;
+    }
+
+.stat-blue {
+    background: #EBF2FC;
+    border-color: #B5D4F4;
+}
+
+.stat-teal {
+    background: #E1F5EE;
+    border-color: #9FE1CB;
+}
+
+.stat-gold {
+    background: #FDF6E3;
+    border-color: #FAC775;
+}
+
+.stat-indigo {
+    background: #EEEDFE;
+    border-color: #CECBF6;
+}
+
+.stat-icon {
+    font-size: 2rem;
+    line-height: 1;
+    flex-shrink: 0;
+}
+
+.stat-body {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.stat-value {
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: var(--primary);
+    line-height: 1;
+}
+
+.stat-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: var(--text-muted);
+}
+
+/* ── Info Row ── */
+.info-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.info-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: 50px;
+    padding: 6px 16px;
+    font-size: 0.82rem;
+}
+
+.info-chip-label {
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    font-size: 0.72rem;
+}
+
+.info-chip-value {
+    color: var(--primary);
+    font-weight: 600;
+}
+
+/* ── Alert ── */
+.dash-alert {
+    background: #eff6ff;
+    border: 1.5px solid #93c5fd;
+    color: #1d4ed8;
+    padding: 11px 18px;
+    border-radius: 10px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+}
+
+/* ── Table Panel ── */
+.table-panel {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    animation: dashFadeIn 0.5s ease 0.25s both;
+}
+
+.table-panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1.5px solid var(--border);
+    flex-wrap: wrap;
+    gap: 1rem;
+    background: var(--primary-xlight);
+}
+
+.table-panel-title {
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: var(--primary);
+    margin: 0;
+}
+
+/* ── Dashboard Search ── */
+.dash-search-wrap {
+    position: relative;
+}
+
+.dash-search {
+    padding: 8px 36px 8px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 50px;
+    font-size: 0.88rem;
+    width: 260px;
+    outline: none;
+    background: var(--surface);
+    color: var(--text);
+    transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+    .dash-search:focus {
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(30,92,165,0.1);
+    }
+
+.dash-search-ico {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.9rem;
+    pointer-events: none;
+}
+
+/* ── Table ── */
+.dash-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+}
+
+    .dash-table thead th {
+        background: var(--bg);
+        color: var(--text-muted);
+        font-weight: 700;
+        font-size: 0.72rem;
+        text-transform: uppercase;
+        letter-spacing: 0.6px;
+        padding: 11px 16px;
+        text-align: left;
+        border-bottom: 1.5px solid var(--border);
+        white-space: nowrap;
+    }
+
+    .dash-table tbody tr {
+        border-bottom: 1px solid var(--border);
+        transition: background var(--transition);
+    }
+
+        .dash-table tbody tr:last-child {
+            border-bottom: none;
+        }
+
+        .dash-table tbody tr:hover {
+            background: var(--primary-xlight);
+        }
+
+    .dash-table td {
+        padding: 12px 16px;
+        vertical-align: middle;
+        color: var(--text);
+    }
+
+.dash-row-num {
+    color: var(--text-muted) !important;
+    font-weight: 700;
+    font-size: 0.78rem;
+    width: 36px;
+}
+
+.dash-book-title {
+    font-weight: 700;
+    color: var(--primary-dark);
+    font-size: 0.92rem;
+}
+
+.dash-book-desc {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-top: 2px;
+    max-width: 300px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.dash-author {
+    color: var(--text-muted) !important;
+    font-size: 0.84rem;
+}
+
+.dash-cat-badge {
+    display: inline-block;
+    padding: 3px 10px;
+    background: var(--primary-xlight);
+    color: var(--primary);
+    border-radius: 20px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+}
+
+.dash-price {
+    font-weight: 800;
+    color: var(--primary) !important;
+    white-space: nowrap;
+}
+
+/* ── Action Buttons ── */
+.dash-actions {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+}
+
+.dash-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 0.88rem;
+    transition: transform var(--transition), opacity var(--transition);
+    border: 1.5px solid transparent;
+}
+
+    .dash-btn:hover {
+        transform: scale(1.15);
+        opacity: 0.9;
+    }
+
+.dash-btn-view {
+    background: var(--primary-xlight);
+    border-color: var(--border);
+}
+
+.dash-btn-edit {
+    background: #e0f2fe;
+    border-color: #bae6fd;
+}
+
+.dash-btn-del {
+    background: #fef2f2;
+    border-color: #fca5a5;
+}
+
+/* ── Empty state ── */
+.dash-empty-cell {
+    text-align: center;
+    padding: 3rem !important;
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+    .dash-table thead th:nth-child(3),
+    .dash-table tbody td:nth-child(3) {
+        display: none;
+    }
+
+    .dash-search {
+        width: 180px;
+    }
+
+    .stat-value {
+        font-size: 1.2rem;
+    }
+}
+
+/* ════════════════════════════════════════════
+   STICKY HEADER + FOOTER  —  append to site.css
+   ════════════════════════════════════════════ */
+
+/* ── Full-height layout so footer always sticks to bottom ── */
+html, body {
+    height: 100%;
+}
+
+.site-body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ── Sticky Header ── */
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 1030;
+    transition: box-shadow 0.25s ease;
+}
+
+    /* Extra shadow when user has scrolled */
+    .site-header.scrolled {
+        box-shadow: 0 4px 24px rgba(30, 92, 165, 0.30) !important;
+    }
+
+    /* The navbar itself already has background from .navbar { background: var(--primary) }
+   We just make sure it's fully opaque — no see-through on scroll */
+    .site-header .navbar {
+        background: var(--primary) !important;
+    }
+
+/* ── Page content grows to fill space between header and footer ── */
+.site-content {
+    flex: 1 0 auto; /* grow to push footer down */
+    padding-top: 1rem;
+}
+
+/* ── Sticky Footer ── */
+.site-footer {
+    flex-shrink: 0; /* never shrink */
+    background: var(--primary);
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 0.82rem;
+    padding: 14px 0;
+    margin-top: auto;
+}
+
+.footer-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.site-footer strong {
+    color: #fff;
+}
+
+/* Remove any old footer styles that may conflict */
+footer.footer {
+    all: unset;
+}

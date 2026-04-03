@@ -1,0 +1,56 @@
+﻿@model List<BookStoreMachineTest.Models.Book>
+
+<table class="dash-table">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (!Model.Any())
+        {
+            <tr>
+                <td colspan="6" class="dash-empty-cell">No books found.</td>
+            </tr>
+        }
+        else
+        {
+            int i = 1;
+            foreach (var book in Model)
+            {
+                <tr data-row="true"
+                    data-search="@((book.Title + " " + book.Author + " " + book.Category).ToLower())">
+                    <td class="dash-row-num">@(i++)</td>
+                    <td>
+                        <div class="dash-book-title">@book.Title</div>
+                        @if (!string.IsNullOrEmpty(book.Description))
+                        {
+                            <div class="dash-book-desc">@book.Description</div>
+                        }
+                    </td>
+                    <td class="dash-author">@book.Author</td>
+                    <td><span class="dash-cat-badge">@book.Category</span></td>
+                    <td class="dash-price">$@book.Price.ToString("F2")</td>
+                    <td>
+                        <div class="dash-actions">
+                            <a asp-controller="Books" asp-action="Details"
+                               asp-route-id="@book.Id" class="dash-btn dash-btn-view"
+                               title="View">👁</a>
+                            <a asp-controller="Books" asp-action="Edit"
+                               asp-route-id="@book.Id" class="dash-btn dash-btn-edit"
+                               title="Edit">✏️</a>
+                            <a asp-controller="Books" asp-action="Delete"
+                               asp-route-id="@book.Id" class="dash-btn dash-btn-del"
+                               title="Delete">🗑</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

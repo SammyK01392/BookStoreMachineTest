@@ -3,74 +3,88 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - BookStoreMachineTest</title>
+    <title>@ViewData["Title"] - BookStore</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/BookStoreMachineTest.styles.css" asp-append-version="true" />
 </head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-dark sticky-top">
+<body class="site-body">
+
+    <!-- ── Sticky Navbar ── -->
+    <header class="site-header" id="siteHeader">
+        <nav class="navbar navbar-expand-sm navbar-dark">
             <div class="container">
-                <a class="navbar-brand" asp-controller="Books" asp-action="Index">📚 BookStore</a>
+                <a class="navbar-brand" asp-controller="Dashboard" asp-action="Index">📚 BookStore</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navMenu">
-
-                    <!-- Left side links -->
                     <ul class="navbar-nav me-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" asp-controller="Books" asp-action="Index">Books</a>
-                        </li>
                         @if (User.Identity?.IsAuthenticated == true)
                         {
                             <li class="nav-item">
-                                <a class="nav-link" asp-controller="Books" asp-action="Create">+ Add Book</a>
+                                <a class="nav-link" asp-controller="Dashboard" asp-action="Index">📊 Dashboard</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Books" asp-action="Index">📚 Books</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Books" asp-action="Create">＋ Add Book</a>
                             </li>
                         }
                     </ul>
-
-                    <!-- Right side: user info + logout -->
                     @if (User.Identity?.IsAuthenticated == true)
                     {
                         <ul class="navbar-nav ms-auto align-items-center gap-2">
                             <li class="nav-item">
-                                <span class="nav-link pe-none" style="color:rgba(255,255,255,0.6); font-size:0.85rem;">
+                                <span class="nav-link pe-none" style="color:rgba(255,255,255,0.6);font-size:0.82rem;">
                                     👤 @User.Identity.Name
                                 </span>
                             </li>
                             <li class="nav-item">
                                 <form asp-controller="Account" asp-action="Logout" method="post" class="m-0">
                                     @Html.AntiForgeryToken()
-                                    <button type="submit" class="nav-signout-btn">
-                                        Sign Out
-                                    </button>
+                                    <button type="submit" class="nav-signout-btn">Sign Out</button>
                                 </form>
                             </li>
                         </ul>
                     }
-
                 </div>
             </div>
         </nav>
     </header>
 
-    <div class="container content-wrap">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+    <!-- ── Page Content ── -->
+    <div class="site-content">
+        <div class="container">
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
+        </div>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <!-- ── Sticky Footer ── -->
+    <footer class="site-footer">
         <div class="container">
-            &copy; 2026 - BookStoreMachineTest - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            <div class="footer-inner">
+                <span>📚 <strong>BookStore Admin</strong></span>
+                <span>&copy; 2026 — All rights reserved</span>
+            </div>
         </div>
     </footer>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <script>
+        // Add .scrolled class to header after scrolling 10px — triggers shadow effect
+        const header = document.getElementById('siteHeader');
+        window.addEventListener('scroll', () => {
+            header.classList.toggle('scrolled', window.scrollY > 10);
+        }, { passive: true });
+    </script>
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
